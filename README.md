@@ -1,17 +1,17 @@
 # Foxconn_Pino_Study_Project
 
-Study Foxconn AI textbook from my relatives — I'm 17 years old, learning in 2025.
+Reference book: *AI Introduction* by Foxconn, provided by the author’s relatives.
 
-I'm interested in AI, and luckily, my uncle-in-law is an AI instructor.  
-He gave me a book as a gift to encourage me — that’s when I started reading and experimenting.
+Hello, I'm maja-ja, a 17-year-old homeschooling student living in central Taiwan.  
+I started learning AI (Artificial Intelligence) in July 2025.
 
-In Part_1.py, I'm learning the basics of neural networks, including:
+In `Part_1.py`, you can learn data analysis methods, various algorithms, and basic types of neural networks, including:  
+- **KNN** – K-Nearest Neighbors  
+- **K-means** – K-means Clustering  
+- **FNN** – Feedforward Neural Networks  
+- **CNN** – Convolutional Neural Networks  
+- **RNN** – Recurrent Neural Networks  
 
-- FNN – Feedforward Neural Networks  
-- CNN – Convolutional Neural Networks  
-- RNN – Recurrent Neural Networks  
+In `Part_2.py`, you can learn about image recognition, video recognition, and deep neural networks (DNN).
 
-Instead of just watching videos, I wanted to understand how the math works,  
-and actually build the models myself.
-
-So this repo is my way of learning — by coding, failing, and trying again.
+In `Part_3.py`, you can learn about audio recognition and natural language processing (NLP).
