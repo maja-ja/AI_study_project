@@ -1,0 +1,7 @@
+先刪除 macOS 產生的副檔
+確認本地沒有未提交的變更
+設定拉取策略（以 rebase 為例）
+再次嘗試拉取
+find .git/objects/pack -name "._*" -delete 
+git config pull.rebase true
+git pull origin main
