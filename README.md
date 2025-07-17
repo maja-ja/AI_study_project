@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Foxconn_Pino_Study_Project
 
 Study Foxconn AI textbook from my relatives — I'm 17 years old, learning in 2025.
