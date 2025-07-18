@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 import wave
 import librosa
 import librosa.display
-import json
+#import json
 import datetime
+import os
 
 # === 基本參數設定 ===
 FORMAT = pyaudio.paInt16
@@ -13,11 +14,16 @@ CHANNELS = 1
 RATE = 44100
 CHUNK = 4096
 
+# 在 timestamp 之前先建立 audio 資料夾
+audio_folder = "audio"
+os.makedirs(audio_folder, exist_ok=True)
+
 # 自動產生時間戳檔名
 timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-WAVE_OUTPUT_FILENAME = f'audio_output_{timestamp}.wav'
-MFCC_IMAGE_FILENAME = f'mfcc_output_{timestamp}.png'
-MFCC_JSON_FILENAME = f'A_memory_{timestamp}.json'
+# 將 wav 檔名改成放進 audio 資料夾
+WAVE_OUTPUT_FILENAME = os.path.join(audio_folder, f'audio_output_{timestamp}.wav')
+
+
 
 # === 啟動錄音 ===
 audio = pyaudio.PyAudio()
@@ -72,23 +78,16 @@ def display_audio_waveform():
         mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
 
         # === 3. 顯示與儲存 MFCC 圖像 ===
-        plt.ioff()
-        plt.figure(figsize=(10, 4))
-        librosa.display.specshow(mfcc, x_axis='time')
-        plt.colorbar()
-        plt.title('MFCC')
-        plt.tight_layout()
-        plt.savefig(MFCC_IMAGE_FILENAME)
-        plt.show()
-        plt.close()
 
         # === 4. 儲存 MFCC 向量到 JSON 檔案 ===
-        with open(MFCC_JSON_FILENAME, "w") as f:
-            json.dump(mfcc.tolist(), f)
+        folder = "mfcc_files"
+        os.makedirs(folder, exist_ok=True)  # 確保資料夾存在
 
-        print(f"✅ 音訊已儲存：{WAVE_OUTPUT_FILENAME}")
-        print(f"✅ MFCC 圖已儲存：{MFCC_IMAGE_FILENAME}")
-        print(f"✅ MFCC 向量已儲存：{MFCC_JSON_FILENAME}")
+        filename = f"mfcc_{timestamp}.npz"
+        filepath = os.path.join(folder, filename)
+
+        np.savez(filepath, mfcc=mfcc)
+        print(f"MFCC 已存到 {filepath}") 
 
 # === 執行錄音流程 ===
 display_audio_waveform()
