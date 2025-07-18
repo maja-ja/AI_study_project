@@ -15,9 +15,9 @@
 #   - y_hat[i] is the predicted value
 #   - (y[i] - y_hat[i])^2 is the squared error for each sample
 # In Python, this can be implemented as:
-loss = sum((y - y_hat)**2 for y, y_hat in zip(y_true, y_hat)) / len(y_true)
+#loss = sum((y - y_hat)**2 for y, y_hat in zip(y_true, y_hat)) / len(y_true)
 # or:
-loss = sum((y - y_pred)**2 for y, y_pred in zip(y_true, y_pred)) / len(y_true) # Mean Squared Error
+#loss = sum((y - y_pred)**2 for y, y_pred in zip(y_true, y_pred)) / len(y_true) # Mean Squared Error
 # ----------- function of learning ------------------
 # For a simple neural unit (neuron), the output is calculated as:
 # a = σ(w[1]*x[1] + w[2]*x[2] + w[3]*x[3] + b)
