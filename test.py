@@ -1,22 +1,25 @@
-p=1
-a=2
-t=3
-P=[a,t]
-A=[p,t]
-T=[p,a]
 import pyaudio
 import numpy as np
 import matplotlib.pyplot as plt
 import wave
 import librosa
 import librosa.display
-import matplotlib.pyplot as plt
-FORMAT = pyaudio.paInt16
-CHANNELS = 1  # Mono audio
-RATE = 44100  # Sample rate (samples per second)
-CHUNK = 4096  # Number of frames per buffer
-WAVE_OUTPUT_FILENAME = 'audio_output.wav'
+import json
+import datetime
 
+# === 基本參數設定 ===
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+CHUNK = 4096
+
+# 自動產生時間戳檔名
+timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+WAVE_OUTPUT_FILENAME = f'audio_output_{timestamp}.wav'
+MFCC_IMAGE_FILENAME = f'mfcc_output_{timestamp}.png'
+MFCC_JSON_FILENAME = f'A_memory_{timestamp}.json'
+
+# === 啟動錄音 ===
 audio = pyaudio.PyAudio()
 stream = audio.open(format=FORMAT,
                     channels=CHANNELS,
@@ -24,15 +27,15 @@ stream = audio.open(format=FORMAT,
                     input=True,
                     frames_per_buffer=CHUNK)
 
-# Initialize the plot for real-time waveform display
+# === 實時波形顯示設定 ===
 plt.ion()
 fig, ax = plt.subplots()
 x = np.arange(0, CHUNK)
 line, = ax.plot(x, np.zeros(CHUNK))
 ax.set_xlim(0, CHUNK)
-ax.set_ylim(-32768, 32767)  # Assuming 16-bit audio
+ax.set_ylim(-32768, 32767)
 
-# Create a wave file to save the audio
+# === WAV檔案寫入設定 ===
 wave_output_file = wave.open(WAVE_OUTPUT_FILENAME, "wb")
 wave_output_file.setnchannels(CHANNELS)
 wave_output_file.setsampwidth(audio.get_sample_size(FORMAT))
@@ -43,36 +46,49 @@ def update_plot(data):
     fig.canvas.draw()
     fig.canvas.flush_events()
 
-# Function to continuously capture and display audio
+# === 主錄音流程 ===
 def display_audio_waveform():
+    print("🎙️ 開始錄音中... 按 Ctrl+C 結束並進行分析")
     try:
         while True:
             audio_data = np.frombuffer(stream.read(CHUNK, exception_on_overflow=False), dtype=np.int16)
             update_plot(audio_data)
             wave_output_file.writeframes(audio_data.tobytes())
     except KeyboardInterrupt:
-        pass
+        pass  # 停止錄音後跳出迴圈
+    finally:
+        print("\n🛑 錄音結束，開始分析...")
 
+        # === 結束錄音 ===
+        stream.stop_stream()
+        stream.close()
+        audio.terminate()
+        wave_output_file.close()
+
+        # === 1. 載入音訊資料 ===
+        y, sr = librosa.load(WAVE_OUTPUT_FILENAME, sr=RATE)
+
+        # === 2. 取 MFCC 特徵向量 ===
+        mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
+
+        # === 3. 顯示與儲存 MFCC 圖像 ===
+        plt.ioff()
+        plt.figure(figsize=(10, 4))
+        librosa.display.specshow(mfcc, x_axis='time')
+        plt.colorbar()
+        plt.title('MFCC')
+        plt.tight_layout()
+        plt.savefig(MFCC_IMAGE_FILENAME)
+        plt.show()
+        plt.close()
+
+        # === 4. 儲存 MFCC 向量到 JSON 檔案 ===
+        with open(MFCC_JSON_FILENAME, "w") as f:
+            json.dump(mfcc.tolist(), f)
+
+        print(f"✅ 音訊已儲存：{WAVE_OUTPUT_FILENAME}")
+        print(f"✅ MFCC 圖已儲存：{MFCC_IMAGE_FILENAME}")
+        print(f"✅ MFCC 向量已儲存：{MFCC_JSON_FILENAME}")
+
+# === 執行錄音流程 ===
 display_audio_waveform()
-
-stream.stop_stream()
-stream.close()
-audio.terminate()
-wave_output_file.close()
-print('Audio saved to', WAVE_OUTPUT_FILENAME)
-
-
-# 1. 讀入剛剛錄好的 .wav 檔
-y, sr = librosa.load(WAVE_OUTPUT_FILENAME, sr=RATE)
-
-# 2. 取 MFCC（梅爾頻率倒譜係數）
-mfcc = librosa.feature.mfcc(y=y, sr=sr, n_mfcc=13)
-
-# 3. 畫出 MFCC
-
-plt.figure(figsize=(10, 4))
-librosa.display.specshow(mfcc, x_axis='time')
-plt.colorbar()
-plt.title('MFCC')
-plt.tight_layout()
-plt.show()
