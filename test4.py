@@ -1,3 +1,8 @@
+# test4.py
+# 這個腳本負責讀取 .npz
+# 檔案中的 MFCC 特徵向量，
+# 並使用隨機森林分類器進行訓練和測試。
+# 最後輸出測試集的準確率。
 import os
 import numpy as np
 import librosa
