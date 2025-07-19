@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "text": "cup",
+    "vector": [
+      99,
+      117,
+      112
+    ],
+    "image_path": "images/000001_cup.jpeg"
+  }
+]
