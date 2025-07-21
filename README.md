@@ -4,6 +4,7 @@ Reference book: *AI Introduction* by Foxconn, provided by the author’s relativ
 
 Hello, I'm maja-ja, a 17-year-old homeschooling student living in central Taiwan.  
 I started learning AI (Artificial Intelligence) in July 2025.
+I'm a macOS user.
 
 In `Part_1.py`, you can learn data analysis methods, various algorithms, and basic types of neural networks, including:  
 - **KNN** – K-Nearest Neighbors  
