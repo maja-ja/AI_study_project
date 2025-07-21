@@ -32,4 +32,4 @@ In folder `images`, you can see lots of pictures, file type including: .jpg, .jp
 
 `test2.py` same of text of `test1.py`
 
-`wordbase.json` record data from test1.
+`wordbase.json` record data from `test1.py`.
