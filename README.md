@@ -18,9 +18,9 @@ In `Part_3.py`(haven't created), you can learn about audio recognition and natur
 
 In folder `images`, you can see lots of pictures, file type including: .jpg, .jpeg, .png. These files will be file`test2.py`'s material.
 
-README.md literally, read me. :)
+`README.md` literally, read me. :)
 
-dataset_index.json put word-picture-number data from `test2.py`.
+`dataset_index.json` put word-picture-number data from `test2.py`.
 
 `github_help.txt` some bash command for maja-ja own use.
 
