@@ -12,28 +12,24 @@ In `Part_1.py`, you can learn data analysis methods, various algorithms, and bas
 - **CNN** – Convolutional Neural Networks  
 - **RNN** – Recurrent Neural Networks  
 
-In `Part_2.py`, you can learn about image recognition, video recognition, and deep neural networks (DNN).
+In `Part_2.py`(haven't created),you can learn about image recognition, video recognition, and deep neural networks (DNN).
 
-In `Part_3.py`, you can learn about audio recognition and natural language processing (NLP).
+In `Part_3.py`(haven't created), you can learn about audio recognition and natural language processing (NLP).
 
-In folder `images`, you can see lots of pictures, file type including: .jpeg, .png,
+In folder `images`, you can see lots of pictures, file type including: .jpg, .jpeg, .png. These files will be file`test2.py`'s material.
 
-mfcc_files
+README.md literally, read me. :)
 
-README.md
+dataset_index.json put word-picture-number data from `test2.py`.
 
-dataset_index.json
+`github_help.txt` some bash command for maja-ja own use.
 
-github_help.txt
+`root.py` a launcher launch another python files which according number in `root.txt`.
 
-part_1.py
+`root.txt` only has numbers in.
 
-root.py
+`test1.py` please go to this file to understand what file do. (i don't know how to explain.)
 
-root.txt
+`test2.py` same of text of `test1.py`
 
-test1.py
-
-test2.py
-
-wordbase.json
+`wordbase.json` record data from test1.
