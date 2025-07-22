@@ -7,7 +7,8 @@ I started learning AI (Artificial Intelligence) in July 2025.
 I'm a macOS user.
 
 In `Part_1.py`, you can learn data analysis methods, various algorithms, and basic types of neural networks, including:  
-- **KNN** – K-Nearest Neighbors  
+
+- **KNN** – K-Nearest Neighbors
 - **K-means** – K-means Clustering  
 - **FNN** – Feedforward Neural Networks  
 - **CNN** – Convolutional Neural Networks  
