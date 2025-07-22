@@ -1,6 +1,6 @@
-# Foxconn_Pino_Study_Project
+# AI_Study_Project
 
-Reference book: *AI Introduction* by Foxconn, provided by the author’s relatives.
+Reference book: *AI Introduction* by Foxconn, algorithm illustrateby Moriteru Ishid, Shuichi Miyazaki.
 
 Hello, I'm maja-ja, a 17-year-old homeschooling student living in central Taiwan.  
 I started learning AI (Artificial Intelligence) in July 2025.
@@ -16,6 +16,8 @@ In `Part_1.py`, you can learn data analysis methods, various algorithms, and bas
 In `Part_2.py`(haven't created),you can learn about image recognition, video recognition, and deep neural networks (DNN).
 
 In `Part_3.py`(haven't created), you can learn about audio recognition and natural language processing (NLP).
+
+In `Part_4.py`(haven't created), you can learn about 33 algorithms explain and illustrate.
 
 In folder `images`, you can see lots of pictures, file type including: .jpg, .jpeg, .png. These files will be file`test2.py`'s material.
 
