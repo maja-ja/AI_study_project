@@ -14,8 +14,9 @@ PIXEL_SIZE = 10
 CANVAS_SIZE = GRID_SIZE * PIXEL_SIZE
 
 # 資料夾路徑（根據你給的）
-BASE_DIR = "/Users/chenpinrong/Foxconn_Pino_study_project-2/database/"
-WORD_BASE_PATH = os.path.join(BASE_DIR, "word_number", "wordbase.json")
+BASE_DIR = "/Users/chenpinrong/Desktop/AI_study_project/database"
+PATH_DIR = "/Users/chenpinrong/Desktop/AI_study_project/path"
+WORD_BASE_PATH = os.path.join(BASE_DIR, "word_number", "path.json")
 IMAGES_DIR = os.path.join(BASE_DIR, "word_picture", "images")
 DATASET_INDEX_PATH = os.path.join(BASE_DIR, "word_picture", "dataset_index.json")
 
@@ -43,6 +44,9 @@ class CanvasWidget(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
 
+        # === 填滿白色背景 ===
+        painter.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE, QColor(255, 255, 255))
+
         # 背景圖
         if self.background:
             painter.drawImage(0, 0, self.background)
@@ -61,7 +65,7 @@ class CanvasWidget(QWidget):
                 painter.setPen(Qt.black)
                 painter.drawEllipse(px + 2, py + 2, 6, 6)
 
-        # 格線
+        # 畫格線
         painter.setPen(QPen(QColor(200, 200, 200), 1))
         for i in range(0, CANVAS_SIZE, PIXEL_SIZE):
             painter.drawLine(i, 0, i, CANVAS_SIZE)
@@ -128,7 +132,7 @@ class MainWindow(QMainWindow):
 
         # 處理 path.json（如果存在）
         base_name = os.path.splitext(os.path.basename(image_path))[0]
-        path_json_path = os.path.join(IMAGES_DIR, base_name + "_path.json")
+        path_json_path = os.path.join(PATH_DIR, "path.json")
 
         if os.path.exists(path_json_path):
             with open(path_json_path, "r", encoding="utf-8") as f:
